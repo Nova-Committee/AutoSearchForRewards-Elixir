@@ -46,4 +46,6 @@ jobs:
       with:
         name: AutoSearchForRewards
         path: _build/dev/rel/rewards
+    env:
+          ImageOS: ubuntu20
       
