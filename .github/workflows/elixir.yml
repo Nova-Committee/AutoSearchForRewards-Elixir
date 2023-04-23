@@ -43,7 +43,7 @@ jobs:
       uses: actions/download-artifact@v2.1.1
       with:
         name: AutoSearchForRewards
-        path: _build/dev/rel
+        path: _build
     env:
           ImageOS: ubuntu20
       
