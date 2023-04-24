@@ -13,17 +13,26 @@ defmodule Rewards do
     for i <- 1..f do
       IO.puts("Execution in progress, No.#{i}...")
       r = :rand.uniform() * 100
-      :os.cmd(:"start https://www.bing.com/search?q=#{r}")
+      open_url("https://www.bing.com/search?q=#{r}")
       :timer.sleep(t)
     end
     IO.puts("Opening the rewards page...")
-    :os.cmd(:"start https://rewards.bing.com")
+    open_url("https://rewards.bing.com")
   end
 
   defp get_integer(str, default) do
     case String.to_integer(str) do
       s when is_integer(s) -> s
       _ -> default
+    end
+  end
+
+  defp open_url(url) do
+    case :os.type() do
+      {:unix, :darwin} -> :os.cmd(:"open #{url}")
+      {:unix, :linux} -> :os.cmd(:"xdg-open #{url}")
+      {:win32, :nt} -> :os.cmd(:"start #{url}")
+      _ -> IO.puts("Operating System Unsupported!")
     end
   end
 end
